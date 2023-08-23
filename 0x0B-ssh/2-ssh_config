@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#  Your machine has an SSH configuration file for the local SSH client, Share your SSH client configuration in your answer file.
+
+Host *
+    HostName 172.17.0.28
+    User ubuntu
+    IdentityFile ~/.ssh/school
+    PasswordAuthentication no
