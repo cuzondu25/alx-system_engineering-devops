@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Bash script that generates a MySQL dump and creates a compressed archive out of it
+
+# check if password is provided
+if [ $# -ne 1 ];
+then
+    echo "usage $0 <password>"
+    exit 1
+fi
+
+# create mysql dump file
+sudo mysqldump -u root -p$1 --all-databases > backup.sql
+
+# Check if MySQL dump was successful
+if [ ! -f "backup.sql" ]; then
+    echo "MySQL dump failed. Exiting."
+    exit 1
+fi
+
+# generate archive file name
+archive_file=$(date +"%d-%m-%Y")
+
+# compress 
+tar -caf "$archive_file.tar.gz" backup.sql
+
+# Check if compression was successful
+if [ $? -eq 0 ]; then
+    echo "Backup completed successfully. Archive: $archive_file"
+else
+    echo "Compression failed. Exiting."
+    exit 1
+fi
