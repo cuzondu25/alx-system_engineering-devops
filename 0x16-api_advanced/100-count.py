@@ -1,10 +1,12 @@
 #!/usr/bin/python3
 """ a recursive function that queries the Reddit API,
-parses the title of all hot articles, and prints a sorted count of given keywords
+parses the title of all hot articles,
+and prints a sorted count of given keywords
 case-insensitive, delimited by spaces.
 Javascript should count as javascript, but java should not."""
 
 import requests
+
 
 def count_words(subreddit, word_list, instances={}, after="", count=0):
     """Prints counts of given words in hot posts of a given subreddit.
@@ -52,4 +54,3 @@ def count_words(subreddit, word_list, instances={}, after="", count=0):
         [print("{}: {}".format(k, v)) for k, v in instances]
     else:
         count_words(subreddit, word_list, instances, after, count)
-
